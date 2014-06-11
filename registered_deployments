@@ -1,0 +1,7 @@
+# Example
+[jwang-demo1]
+master = vega.cs.washington.edu
+rest_port = 8964
+working_dir = /disk3/jwang/demo1-files
+deployment_file = deployment.cfg.demo1.8
+secret_code = apple
