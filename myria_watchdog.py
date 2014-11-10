@@ -14,7 +14,7 @@ class myHandler(BaseHTTPRequestHandler):
             self.send_response(400)
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            self.wfile.write("Missing argument: " + key)
+            self.wfile.write("Missing argument: " + key + "\n")
             return False
         else:
             return True
@@ -63,20 +63,20 @@ class myHandler(BaseHTTPRequestHandler):
             
             try:
                 args = ["ssh", master, "cd", working_dir, "&& ./stop_all_by_force.py", deployment_file]
-                subprocess.check_output(args)
+                subprocess.check_output(args, stderr=subprocess.STDOUT)
                 args = ["ssh", master, "cd", working_dir, "&& ./launch_cluster.sh", deployment_file]
-                subprocess.check_output(args)
+                subprocess.check_output(args, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError as e:
                 self.send_response(400)
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
-                self.wfile.write("Error, return code: " + str(e.returncode));
+                self.wfile.write(e.output);
                 return
 
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            self.wfile.write("Restarted successfully.");
+            self.wfile.write("Restarted successfully.\n");
             return
 
 def main(argv):
