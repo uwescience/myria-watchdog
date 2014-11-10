@@ -1,10 +1,4 @@
 The watchdog of Myria.
 
-How to use:
-
-1. copy the script and the registered_deployments file to the same directory
-
-2. add your deployment to the registered_deployments file
-
-3. launch the script
+Launch the script to use. Make sure you can ssh from the watchdog machine to any of your workers without password.
 
